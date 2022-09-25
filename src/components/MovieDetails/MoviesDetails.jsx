@@ -24,6 +24,7 @@ export function MoviesDetails({ movieId }) {
 
   useEffect(() => {
     setPrevPage(location);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   if (!movies) {
@@ -35,10 +36,11 @@ export function MoviesDetails({ movieId }) {
       <Box display="flex">
         <>
           <Box display="flex" flexDirection="column" alignItems="flex-start">
-            <Button to={prevPage?.state?.from}>
+            <Button to={prevPage?.state?.from ?? '/'}>
               {console.log('qqq', location)}
               <VscArrowLeft /> &nbsp;Back
             </Button>
+
             <img
               src={`https://image.tmdb.org/t/p/original${movies?.poster_path}`}
               alt={movies?.title}
