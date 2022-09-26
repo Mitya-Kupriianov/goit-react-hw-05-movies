@@ -5,7 +5,7 @@ import Search from '../components/Search/Search';
 import { MovieList } from '../components/MovieList/MovieList';
 import Box from '../components/Box';
 
-export const Movies = () => {
+const Movies = () => {
   //state search movies
   const [movies, setMovies] = useState([]);
   const [searchParams, setSearchParams] = useSearchParams();
@@ -33,3 +33,5 @@ export const Movies = () => {
     </Box>
   );
 };
+
+export default Movies;

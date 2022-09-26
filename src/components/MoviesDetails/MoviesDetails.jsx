@@ -2,30 +2,22 @@ import React, { useEffect, useState } from 'react';
 import { Outlet, useLocation } from 'react-router-dom';
 import { getMovie } from '../../service/api';
 import Box from '../Box';
-import {
-  Text,
-  H1,
-  Title,
-  Button,
-  Nav,
-  Item,
-  Ul,
-} from '../MovieDetails/MoviesDetails.styled';
+import { Text, H1, Title, Button, Nav, Item, Ul } from './MoviesDetails.styled';
 import { VscArrowLeft } from 'react-icons/vsc';
 
 export function MoviesDetails({ movieId }) {
   const location = useLocation();
   const [movies, setMovies] = useState(null);
-  const [prevPage, setPrevPage] = useState(null);
-
+  // const [prevPage, setPrevPage] = useState(null);
+  console.log(location);
   useEffect(() => {
     getMovie(movieId).then(data => setMovies(data));
   }, [movieId]);
 
-  useEffect(() => {
-    setPrevPage(location);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  // useEffect(() => {
+  //   setPrevPage(location);
+  //   // eslint-disable-next-line react-hooks/exhaustive-deps
+  // }, []);
 
   if (!movies) {
     return null;
@@ -36,8 +28,7 @@ export function MoviesDetails({ movieId }) {
       <Box display="flex">
         <>
           <Box display="flex" flexDirection="column" alignItems="flex-start">
-            <Button to={prevPage?.state?.from ?? '/'}>
-              {console.log('qqq', location)}
+            <Button to={location?.state?.from ?? '/'}>
               <VscArrowLeft /> &nbsp;Back
             </Button>
 
@@ -72,11 +63,14 @@ export function MoviesDetails({ movieId }) {
         <Text>Additional information</Text>
         <Ul>
           <Nav>
-            <Item to="cast"> Cast</Item>
+            <Item to="cast" state={location?.state ?? '/'}>
+              Cast
+            </Item>
           </Nav>
           <Nav>
-            {' '}
-            <Item to="reviews"> Reviews</Item>
+            <Item to="reviews" state={location?.state ?? '/'}>
+              Reviews
+            </Item>
           </Nav>
         </Ul>
       </Box>

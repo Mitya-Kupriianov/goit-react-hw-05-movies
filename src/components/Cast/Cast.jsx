@@ -3,7 +3,6 @@ import { useParams } from 'react-router-dom';
 import { getCast } from '../../service/api';
 import Box from '../Box';
 import { Ul, Item, Title, Text } from './Cast.styled';
-import { AiOutlineStop } from 'react-icons/ai';
 
 const Cast = () => {
   const [cast, setCast] = useState([]);
@@ -18,15 +17,15 @@ const Cast = () => {
       <Ul>
         {cast.map(({ name, id, character, profile_path }) => (
           <Item key={id}>
-            {profile_path ? (
-              <img
-                src={`https://image.tmdb.org/t/p/w500/${profile_path}`}
-                alt={name}
-                width={200}
-              />
-            ) : (
-              <AiOutlineStop size="100px" />
-            )}
+            <img
+              src={`https://image.tmdb.org/t/p/w500/${
+                profile_path === null
+                  ? 'kZobKKPhs2vhuXu9SWvyg1u3zDM.jpg'
+                  : profile_path
+              }`}
+              alt={name}
+              width={200}
+            />
             <Title>{name}</Title>
             <Text>Character: {character}</Text>
           </Item>
